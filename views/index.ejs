@@ -93,7 +93,28 @@
             <!-- /.container-fluid -->
         </nav>
 
-        <img src="/images/banner.jpg" width="100%" alt="">
+        <!-- <img src="/images/banner.jpg" width="100%" alt=""> -->
+
+    </div>
+
+    <div class="container banner">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    
+            <ol class="carousel-indicators">
+                <% banners.forEach((item,i)=>{ %>
+                    <li data-target="#carousel-example-generic" class="<%= i==0?'active':'' %>" data-slide-to="<%= i %>"></li>
+                <% }) %>
+            </ol>
+    
+            <div class="carousel-inner" role="listbox">
+                <% banners.forEach((item,i)=>{ %>
+                    <div style="height:500px;   overflow:hidden;" class="item <%= i==0?'active':'' %>">
+                        <img width="100%" src="<%= item.bannerurl %>" title="<%= item.bannertitle %>" alt="...">
+                    </div>
+                <% }) %>
+            </div>
+    
+        </div>
     </div>
     <script src="/javascripts/index.js"></script>
 </body>
