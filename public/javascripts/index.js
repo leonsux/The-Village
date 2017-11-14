@@ -22,3 +22,56 @@ $('.logined a').click(()=>{
     // $('.logined').addClass('hidden')
     console.log("3")
 })
+
+// 列表相关---------------------------------
+
+//点击分类显示不同类别的商品
+var comics_cache = {}//准备存放缓存
+$(".comics").delegate(".type-btn", "click", function (e) {
+    //控制样式
+    $(".type-btn").removeClass('btn-primary').addClass("btn-info")
+    $(this).removeClass('btn-info').addClass("btn-primary")
+    //1.获取到此按钮代表的classid
+    let classid = $(this).data('id')//$(this).attr("data-id")
+    if (Date.now() - comics_cache.time > 10000) {//每次读取缓存前看看时间有没有很长，如果缓存已经存在很长事件了，就清掉
+        comics_cache = []
+    }
+    if (comics_cache[classid]) {//看看缓存里有没有，有的话就直接用
+        showcomics(comics_cache[classid])
+    } else {
+        // 切换选项卡的问题应该在这儿
+        $.ajax({
+            url: "/comic/getComics",
+            data: { classid: classid },
+            success: function (results) {
+                //把缓存存起来
+                comics_cache.time = Date.now()
+                comics_cache[classid] = results
+                showcomics(results)
+            }
+        })
+    }
+})
+
+
+function showcomics(results) {
+    let str = ''
+    console.log(results)
+    results.forEach((item, i) => {
+        str += `
+            <div class="col-xs-12 col-sm-6 col-md-3">
+                <div class="thumbnail">
+                <img src="${item.imgurl}" title="${item.name}" >
+                <div class="caption">
+                    <h3>${item.name}</h3>
+                    <p>人气：${item.hot}</p>
+                    <p>
+                    <button class="btn btn-danger" >加入补番计划</button> 
+                    </p>
+                </div>
+                </div>
+            </div>
+        `
+    })
+    $(".comics .row").html(str)
+}

@@ -77,6 +77,49 @@
     
         </div>
     </div>
+
+    <!--  -->
+    <div style="margin-top:20px;" class="container comics">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <% classes.forEach((item,i)=>{ %>
+                    <button data-id="<%= item.classid %>" class=" type-btn btn btn-<%= i==0?'primary':'info'%>">
+                        <%= item.class%>
+                    </button>
+                    <% }) %>
+                        <a class="pull-right" href="/list">查看更多</a>
+            </div>
+            <!--  -->
+            <div class="panel-body">
+                <div class="row">
+            
+                    <!-- xs:0-768 sm:768-992 md:992-1200 lg:1200-- -->
+            
+                    <% comics.forEach((item,i)=>{ %>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="<%= item.imgurl%>" title="<%= item.name %>">
+                                <div class="caption">
+                                    <h3>
+                                        <%= item.name %>
+                                    </h3>
+                                    <p>
+                                        人气：
+                                        <%= item.hot %>
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-danger">加入补番计划</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
     <%- include('./footer.ejs') %>  
     <script src="/javascripts/index.js"></script>
 </body>
