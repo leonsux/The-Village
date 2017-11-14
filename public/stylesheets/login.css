@@ -1,0 +1,11 @@
+.container .panel{
+    width: 30%;
+    float: left;
+}
+.container img{
+    width: 65%;
+    float: right;
+}
+.to-register{
+    cursor: pointer;
+}

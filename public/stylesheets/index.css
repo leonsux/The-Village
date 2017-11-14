@@ -1,0 +1,14 @@
+.logined a, .logined div{
+    float: left;
+}
+.logined a{
+    color: rgba(233, 136, 136, 0.74);
+}
+.logined div{
+    line-height: 50px;
+}
+.logined .userNick{
+    color: rgb(109, 179, 179);
+    font-weight: 900;
+    font-size: 1.2em;
+}
