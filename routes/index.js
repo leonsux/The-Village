@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var connect_mongo = require("../modules/con_mongo")
 var async = require('async')
+var ObjectID = require('mongodb').ObjectID
 /* GET home page. */
 // 主页
 router.get('/', function(req, res, next) {
@@ -89,4 +90,20 @@ router.get('/list', function(req, res, next){
     res.render('list', results)
   })
 })
+
+// 详情页
+router.get('/detail', function (req, res, next) {
+  let _id = req.query.id
+  console.log("我拿到id了",_id)
+  connect_mongo((db)=>{
+    db.collection("comics").find({ _id: ObjectID(_id)}).toArray((err, results)=>{
+      if(err) throw err;
+      console.log(results[0])
+      res.render("detail", {comic: results[0]})
+    })
+    db.close()
+  })
+  // res.render('detail', {})
+});
+
 module.exports = router;

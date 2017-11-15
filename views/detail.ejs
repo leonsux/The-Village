@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>那个村</title>
+    <link rel="stylesheet" href="/lib/css/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <script src="/lib/js/jquery.js"></script>
+    <script src="/lib/js/bootstrap.js"></script>
+    <script src="/lib/js/jq.cookie.js"></script>
+    <style>
+        .comic-box{
+            display: flex;
+        }
+        .big-img{
+            width: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a style="font-size:2em;" class="navbar-brand" href="/">那个村</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="logined hidden">
+                            <div>
+                                <!-- <span>你好：</span> -->
+                                <span class="userNick"></span>
+                            </div>
+                            <a class="" href="/">注销</a>
+                        </li>
+                        <li class="unlogin">
+                            <a href="/login">登陆</a>
+                        </li>
+                        <li class="unlogin">
+                            <a href="/register">注册</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!-- <img src="/images/banner.jpg" width="100%" alt=""> -->
+
+    </div>
+   
+
+    <div class="container comic-box">
+        <div>
+            <img class="big-img" src="<%= comic.imgurl %>" alt="<%= comic.name%>">
+        </div>
+        
+        <div>
+            <h3>剧名：<%= comic.name%></h3>
+            <h3>标签：<%= comic.keyword%></h3>
+            <h3>热度：<%= comic.hot%></h3>
+        </div>
+    </div>
+
+    <!--  -->
+
+    <%- include('./footer.ejs') %>
+        <script src="/javascripts/index.js"></script>
+</body>
+
+</html>
