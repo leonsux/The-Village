@@ -72,7 +72,7 @@ router.get('/list', function(req, res, next){
       })
     },
     function (db, next) {
-      db.collection("comics").find({}).toArray((err, comics) => {
+      db.collection("comics").find({}).limit(4).toArray((err, comics) => {
         if (err) throw err;
         results.comics = comics
         next(null, db)
