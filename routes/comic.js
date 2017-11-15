@@ -10,4 +10,9 @@ router.get('/getComics', function (req, res, next) {
     api_handler.getComics(params, res)
 });
 
+router.get('/getComicsInList', function (req, res, next) {
+    let params = req.query
+    api_handler.getComicsInList(params, res)
+});
+
 module.exports = router;

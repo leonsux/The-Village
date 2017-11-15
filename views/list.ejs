@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>那个村</title>
+    <link rel="stylesheet" href="/lib/css/bootstrap.css">
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <script src="/lib/js/jquery.js"></script>
+    <script src="/lib/js/bootstrap.js"></script>
+    <script src="/lib/js/jq.cookie.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a style="font-size:2em;" class="navbar-brand" href="/">那个村</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="logined hidden">
+                            <div>
+                                <!-- <span>你好：</span> -->
+                                <span class="userNick"></span>
+                            </div>
+                            <a class="" href="/">注销</a>
+                        </li>
+                        <li class="unlogin">
+                            <a href="/login">登陆</a>
+                        </li>
+                        <li class="unlogin">
+                            <a href="/register">注册</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+
+        <!-- <img src="/images/banner.jpg" width="100%" alt=""> -->
+
+    </div>
+
+    <!--  -->
+    <div style="margin-top:20px;" class="container comics">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                分类：
+                <button data-id="0" class="type-btn btn btn-primary">全部</button>
+                <% classes.forEach((item,i)=>{ %>
+                    <button data-id="<%= item.classid %>" class=" type-btn btn btn-info">
+                        <%= item.class%>
+                    </button>
+                <% }) %>
+                &nbsp;&nbsp;&nbsp;排序：
+                <!-- <button data-order="price" class="order-btn  btn btn-info">价格</button> -->
+                <button data-order="hot" class="order-btn btn btn-info">人气</button>
+                        <!-- <a class="pull-right" href="/list">查看更多</a> -->
+                <input id="search-inp" style="width:200px;" placeholder="请输入商品名字" type="text" class="form-control pull-right">
+            </div>
+            <!--  -->
+            <div class="panel-body">
+                <div class="row">
+
+                    <!-- xs:0-768 sm:768-992 md:992-1200 lg:1200-- -->
+
+                    <% comics.forEach((item,i)=>{ %>
+                        <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="thumbnail">
+                                <img src="<%= item.imgurl%>" title="<%= item.name %>">
+                                <div class="caption">
+                                    <h3>
+                                        <%= item.name %>
+                                    </h3>
+                                    <p>
+                                        人气：
+                                        <%= item.hot %>
+                                    </p>
+                                    <p>
+                                        <button class="btn btn-danger">加入补番计划</button>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <%- include('./footer.ejs') %>
+        <script src="/javascripts/list.js"></script>
+</body>
+
+</html>

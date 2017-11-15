@@ -61,4 +61,32 @@ router.get('/login', function(req, res, next){
 router.get('/register', function (req, res, next) {
   res.render('register', {})
 });
+
+// 列表页
+router.get('/list', function(req, res, next){
+  let results = {}
+  async.waterfall([
+    function (next) {
+      connect_mongo((db) => {
+        next(null, db)
+      })
+    },
+    function (db, next) {
+      db.collection("comics").find({}).toArray((err, comics) => {
+        if (err) throw err;
+        results.comics = comics
+        next(null, db)
+      })
+    },
+    function (db, next) {
+      db.collection('class').find({}).toArray((err, classes) => {//查找商品分类
+        if (err) throw err;
+        results.classes = classes
+        next(null, results)
+      })
+    }
+  ], function (err, results) {
+    res.render('list', results)
+  })
+})
 module.exports = router;
