@@ -121,9 +121,9 @@ function showGoods(results) {
         str += `
             <div class="col-xs-12 col-sm-6 col-md-3">
                 <div class="thumbnail">
-                <a href="/detail?id=<%= item._id %>"><img src="${item.imgurl}" title="${item.name}" ></a>
+                <a href="/detail?id=${item._id}"><img src="${item.imgurl}" title="${item.name}" ></a>
                 <div class="caption">
-                    <h3><a href="/detail?id=<%= item._id %>">${item.name}</a></h3>
+                    <h3><a href="/detail?id=${item._id}">${item.name}</a></h3>
                     <p>人气：${item.hot}</p>
                     <p>
                     <button class="btn btn-danger" >加入补番计划</button> 
