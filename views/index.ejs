@@ -15,9 +15,16 @@
         a:hover {
             text-decoration: none;
         }
+        .muc{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 100001;
+        }
     </style>
 </head>
 <body>
+    <!-- <iframe class="muc" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=492190182&auto=1&height=66"></iframe> -->
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -75,7 +82,7 @@
     
             <div class="carousel-inner" role="listbox">
                 <% banners.forEach((item,i)=>{ %>
-                    <div style="height:500px;   overflow:hidden;" class="item <%= i==0?'active':'' %>">
+                    <div style=" overflow:hidden;" class="item <%= i==0?'active':'' %>">
                         <img width="100%" src="<%= item.bannerurl %>" title="<%= item.bannertitle %>" alt="...">
                     </div>
                 <% }) %>
@@ -92,8 +99,10 @@
                     <button data-id="<%= item.classid %>" class=" type-btn btn btn-<%= i==0?'primary':'info'%>">
                         <%= item.class%>
                     </button>
-                    <% }) %>
-                        <a class="pull-right" href="/list">查看更多</a>
+                <% }) %>
+
+                <a class="pull-right" href="/cart">查看购物车</a>
+                <a class="pull-right" href="/list">查看更多</a>
             </div>
             <!--  -->
             <div class="panel-body">
@@ -107,14 +116,14 @@
                                 <a href="/detail?id=<%= item._id %>"><img src="<%= item.imgurl%>" title="<%= item.name %>"></a>
                                 <div class="caption">
                                     <h3>
-                                        <a href="/detail?id=<%= item._id %>"><span style="display: block;" class="animated"><%= item.name %></span>   </a>
+                                        <a href="/detail?id=<%= item._id %>"><span style="display: inline-block;" class="animated"><%= item.name %></span>   </a>
                                     </h3>
                                     <p>
                                         人气：
                                         <%= item.hot %>
                                     </p>
                                     <p>
-                                        <button class="add-cart btn btn-danger">加入补番计划</button>
+                                        <button data-id="<%= item._id %>" class="add-cart btn btn-danger">加入补番计划</button>
                                     </p>
                                 </div>
                             </div>
@@ -127,5 +136,6 @@
     </div>
     <%- include('./footer.ejs') %>  
     <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/cart.js"></script>
 </body>
 </html>

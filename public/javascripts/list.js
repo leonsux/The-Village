@@ -9,7 +9,7 @@ var flag = true; //判断是否还有下一页
 let user_info = $.cookie("user_info")
 // console.log("cookie 串：", user_info, typeof user_info)
 // cookie中存在用户信息
-if (user_info) {
+if (user_info != "null" && user_info) {
     let user = JSON.parse(user_info)
     // console.log(user.uid, user.username, user.nickname)
     // 隐藏登陆注册按钮，显示欢迎信息
@@ -123,7 +123,7 @@ function showGoods(results) {
                 <div class="thumbnail">
                 <a href="/detail?id=${item._id}"><img src="${item.imgurl}" title="${item.name}" ></a>
                 <div class="caption">
-                    <h3><a href="/detail?id=${item._id}">${item.name}</a></h3>
+                    <h3><a href="/detail?id=${item._id}"><span style="display: inline-block;" class="animated">${item.name}</span></a></h3>
                     <p>人气：${item.hot}</p>
                     <p>
                     <button class="btn btn-danger" >加入补番计划</button> 
@@ -138,4 +138,19 @@ function showGoods(results) {
         flag = false;
     }
     $(".comics .row").html(str)
+    // 动画效果
+    $('.animated').mouseover(function () {
+        $(this).addClass('tada');
+    })
+    $('.animated').mouseout(function () {
+        $(this).removeClass('tada');
+    })
 }
+
+// 动画效果
+$('.animated').mouseover(function () {
+    $(this).addClass('tada');
+})
+$('.animated').mouseout(function () {
+    $(this).removeClass('tada');
+})

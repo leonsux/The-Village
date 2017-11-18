@@ -8,26 +8,26 @@
     <title>那个村</title>
     <link rel="stylesheet" href="/lib/css/bootstrap.css">
     <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/lib/css/animate.css">
     <script src="/lib/js/jquery.js"></script>
     <script src="/lib/js/bootstrap.js"></script>
     <script src="/lib/js/jq.cookie.js"></script>
     <style>
-        .comic-box{
-            display: flex;
-            /* justify-content: space-between; */
+        a:hover {
+            text-decoration: none;
         }
-        .big-img{
-            width: 800px;cursor: pointer;
-        }
-        h3{
-            text-align: left;
-            line-height: 1.2em;
-            padding: 10px;
+
+        .muc {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            z-index: 100001;
         }
     </style>
 </head>
 
 <body>
+    <!-- <iframe class="muc" frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=492190182&auto=1&height=66"></iframe> -->
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -73,50 +73,13 @@
         <!-- <img src="/images/banner.jpg" width="100%" alt=""> -->
 
     </div>
+
+
+
    
-
-    <div class="container comic-box text-center">
-        <div>
-            <img class="big-img" src="<%= comic.imgurl %>" alt="<%= comic.name%>" title="查看大图">
-        </div>
-        
-        <div class="comic-info">
-            <h3>剧名：<%= comic.name%></h3>
-            <h3>标签：<%= comic.keyword%></h3>
-            <h3>热度：<%= comic.hot%></h3>
-            <h3>
-                你想几天看完：
-                <button class="sub btn btn-primary" >-</button>
-                <button class="count btn btn-default" >1</button>
-                <button class="add btn btn-primary" >+</button>
-            </h3>
-            <h3 style="text-align:right;"><button class="add-cart btn btn-danger">加入补番计划</button></h3>
-        </div>
-    </div>
-
-    <!--  -->
-
     <%- include('./footer.ejs') %>
-    <script src="/javascripts/index.js"></script>
-    <script>
-        let num = 1;
-        $('.big-img').click(function(){
-            window.open($(this).attr('src'))
-        })
-
-        $(".sub").click(function(){
-            if (num == 1) {
-                alert("呵呵")
-            } else {
-                num--;
-                $(".count").text(num)
-            }
-        })
-        $(".add").click(function () {
-            num++;
-            $(".count").text(num)
-        })
-    </script>
+        <script src="/javascripts/index.js"></script>
+        <script src="/javascripts/cart.js"></script>
 </body>
 
 </html>

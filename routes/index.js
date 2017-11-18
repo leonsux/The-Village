@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
 
     }
   ], function () {
-    console.log(results)
+    // console.log(results)
     res.render('index', results)
   })
   /*
@@ -51,6 +51,11 @@ router.get('/', function(req, res, next) {
   })
   */
   // res.render('index', { title: 'Express' });
+});
+
+// 注册页
+router.get('/cart', function (req, res, next) {
+  res.render('cart', {})
 });
 
 // 登录页
@@ -94,16 +99,18 @@ router.get('/list', function(req, res, next){
 // 详情页
 router.get('/detail', function (req, res, next) {
   let _id = req.query.id
-  console.log("我拿到id了",_id)
+  // console.log("我拿到id了",_id)
   connect_mongo((db)=>{
     db.collection("comics").find({ _id: ObjectID(_id)}).toArray((err, results)=>{
       if(err) throw err;
-      console.log(results[0])
+      // console.log(results[0])
       res.render("detail", {comic: results[0]})
     })
     db.close()
   })
   // res.render('detail', {})
 });
+
+
 
 module.exports = router;

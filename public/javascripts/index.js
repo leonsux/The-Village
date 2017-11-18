@@ -1,7 +1,7 @@
-let user_info = $.cookie("user_info")
-console.log("cookie 串：", user_info, typeof user_info)
+var user_info = $.cookie("user_info")
+console.log("cookie ：", user_info, typeof user_info)
 // cookie中存在用户信息
-if (user_info) {
+if (user_info != "null" && user_info) {
     let user = JSON.parse(user_info)
     console.log(user.uid, user.username, user.nickname)
     // 隐藏登陆注册按钮，显示欢迎信息
@@ -17,10 +17,9 @@ if (user_info) {
 
 // 注销按钮
 $('.logined a').click(()=>{
-    $.cookie('user_info', null)
+    $.cookie('user_info', null, { expires: -1, path: "/" })
     // $('.unlogin').removeClass('hidden')
     // $('.logined').addClass('hidden')
-    console.log("3")
 })
 
 // 列表相关---------------------------------
@@ -63,7 +62,7 @@ function showcomics(results) {
                 <div class="thumbnail">
                 <a href="/detail?id=${item._id }"><img src="${item.imgurl}" title="${item.name}" ></a>
                 <div class="caption">
-                    <h3><a href="/detail?id=${item._id}"><span style="display: block;" class="animated">${item.name}</span></a></h3>
+                    <h3><a href="/detail?id=${item._id}"><span style="display: inline-block;" class="animated">${item.name}</span></a></h3>
                     <p>人气：${item.hot}</p>
                     <p>
                     <button class="add-cart btn btn-danger" >加入补番计划</button> 
@@ -90,3 +89,4 @@ $('.animated').mouseover(function(){
 $('.animated').mouseout(function () {
     $(this).removeClass('tada');
 })
+
