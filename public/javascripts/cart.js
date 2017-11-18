@@ -8,9 +8,10 @@ $('.add-cart').click(function () {
         console.log(user_info, user_info.uid, $(this).data('id'))
         $.ajax({
             url: "/comic/addComic",
-            data: {user_id: user_info.uid, comic_id: $(this).data('id')},
+            // 不传数量的话代表1
+            data: {uid: user_info.uid, comid: $(this).data('id')},
             success: function(results){
-                
+                console.log("返回值：", results)
             }
         })
     } else {
