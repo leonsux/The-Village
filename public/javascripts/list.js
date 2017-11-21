@@ -126,7 +126,7 @@ function showGoods(results) {
                     <h3><a href="/detail?id=${item._id}"><span style="display: inline-block;" class="animated">${item.name}</span></a></h3>
                     <p>人气：${item.hot}</p>
                     <p>
-                    <button class="btn btn-danger" >加入补番计划</button> 
+                    <button data-id="${item._id}" class="add-cart btn btn-danger" >加入补番计划</button> 
                     </p>
                 </div>
                 </div>
@@ -144,6 +144,28 @@ function showGoods(results) {
     })
     $('.animated').mouseout(function () {
         $(this).removeClass('tada');
+    })
+    // 加入购物车
+    $('.caption').delegate('.add-cart', 'click', function () {
+        console.log("舒服舒服")
+        // 获取存在cookie中的用户信息，如果存在则获取，否则给个空值
+        var user_info = $.cookie('user_info') ? JSON.parse($.cookie('user_info')) : null
+
+        if (user_info) {
+            // here，用户id， 番剧 id
+            console.log(user_info, user_info.uid, $(this).data('id'))
+            $.ajax({
+                url: "/comic/addComic",
+                // 不传数量的话代表1
+                data: { uid: user_info.uid, comid: $(this).data('id') },
+                success: function (results) {
+                    console.log("返回值：", results)
+                }
+            })
+        } else {
+            alert("先去登陆吧！")
+            window.location.href = '/login'
+        }
     })
 }
 

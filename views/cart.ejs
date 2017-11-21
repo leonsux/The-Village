@@ -23,6 +23,29 @@
             bottom: 0;
             z-index: 100001;
         }
+         .comics{
+            width: 800px;
+            height: 400px;
+            overflow-y: scroll;
+            margin: 0 auto;
+        }
+        .comics .list-group-item.comic{
+            display: flex;justify-content: space-between;align-items:center;
+
+        }
+        .list-group-item .left{
+            display: flex;
+        }
+        .list-group-item .left img{
+            width: 200px;
+            height: auto;
+        }
+        .comic{
+            position: relative;
+        }
+        .comic .remove{
+            position: absolute;right:10px;top: 10px;cursor: pointer;
+        }
     </style>
 </head>
 
@@ -74,12 +97,153 @@
 
     </div>
 
+    <!--  -->
+    <div class="container con">
+        <h4 class="text-right">
+            <a href="/" class="btn btn-info">返回首页</a>
+            <a href="/list" class="btn btn-info">返回列表</a>
+        </h4>
+
+        <% if(results == 'no-login'){ %>
+            <div class="alert alert-danger text-center">
+                请&nbsp;&nbsp;<a href="/login">登陆</a>&nbsp;&nbsp;~
+            </div>
+        <% } else if(results == 'no-buy') { %>
+            <div>
+                不如<a href="/list">看番</a> 去~
+            </div>
+        <% } else { %>
+            <div class="content">
+                <ul class="list-group comics">
+                    <% results.forEach((item, i)=>{ %>
+                        <li class="list-group-item comic">
+                            <span data-id="<%= item.comid %>" class="glyphicon glyphicon-remove remove"></span>
+                            <div class="left">
+                                <div>
+                                    <a href="/detail?id=<%= item._id %>"><img src="<%= item.imgurl %>" alt=""></a> 
+                                </div>
+                                 &nbsp;&nbsp;
+                                <div class="info-box">
+                                    <h3>
+                                        <%= item.name %>
+                                    </h3>
+                                    <p>热度：
+                                        <span class="hot label label-danger">
+                                            <%= item.hot %>
+                                        </span>&nbsp;&nbsp;小计：
+                                        <span class="xj label label-info">
+                                            <%= item.num*item.hot %>
+                                        </span>
+                                    </p>
+                                </div>
+                        
+                            </div>
+                            <div class="right">
+                                <button data-id="<%= item.comid %>" class="reduce-btn btn btn-primary">-</button>
+                                <button class="num btn btn-default">
+                                    <%= item.num %>
+                                </button>
+                                <button data-id="<%= item.comid %>" class="add-btn btn btn-primary">+</button>
+                            </div>
+                        </li>
+                    <% }) %> 
+                </ul>
+
+                <li style="width:800px;margin:0 auto;" class="list-group-item">
+                    总热度：
+                    <span class="allprice label label-danger">
+                        <%= results.allPrice %>
+                    </span> &nbsp;&nbsp;&nbsp;总数:
+                    <span class="allnum label label-info">
+                        <%= results.allNum %>
+                    </span>&nbsp;&nbsp;&nbsp;
+                </li>
+                </div>
+                
+            </div>
+        <% } %>
+    </div>
+
 
 
    
     <%- include('./footer.ejs') %>
-        <script src="/javascripts/index.js"></script>
-        <script src="/javascripts/cart.js"></script>
+    <script src="/javascripts/index.js"></script>
+    <script src="/javascripts/cart.js"></script>
+    <script>
+
+        let all_num = parseFloat($(".allnum").html()), all_price = parseFloat($(".allprice").html());
+        
+        var user_info = JSON.parse($.cookie('user_info'))
+
+        // 点击加号
+        $(".add-btn").click(function(){
+            $(this).prev().text($(this).prev().text() - 0 + 1)
+            let num = parseInt($(this).prev().text())
+            var $ele = $(this)
+            $.ajax({
+                url: '/comic/addComic',
+                data: {uid: user_info.uid, comid: $(this).data('id')},
+                success: function(){
+                    // 操作完成后更新页面数据
+                    showXJ($ele, true)
+                }
+            })
+        })
+        // 点击减号
+        $(".reduce-btn").click(function(){
+            if ($(this).next().text() == 1) {
+                alert('不能再少了！')
+                return ;
+            }
+            $(this).next().text($(this).next().text() - 1)
+            let uid = JSON.parse($.cookie('user_info')).uid
+            let $good = $(this).parents('.comic')
+            let $img = $good.find('img')
+            let $num = $(this).siblings('.num')
+            var $ele = $(this)
+
+            $.ajax({
+                url: '/comic/reduceComic',
+                data: { comid: $(this).data("id"), uid },
+                success: function(){
+                    showXJ($ele, false)
+                }
+            })
+        })
+
+        $(".remove").click(function(){
+            let uid = JSON.parse($.cookie('user_info')).uid
+            let $ele = $(this)
+            $.ajax({
+                url: 'comic/removeComic',
+                data: { comid: $(this).data("id"), uid },
+                success: function(){
+                    $ele.parent().hide()
+                    all_num-= $ele.parent().find('.num').html()
+                    all_price-= $ele.parent().find('.num').html() * $ele.parent().find('.hot').html()
+                    $(".allnum").html(all_num)
+                    $(".allprice").html(all_price)
+                    if (all_num == 0) {
+                        $(".con").html("<div> 不如 <a href = '/list'> 看番</a> 去~ </div >")
+                    }
+                }
+            })
+        })
+
+        // 更新数据 type用于判断是加是减
+        function showXJ($ele, type){
+            let num = $ele.siblings('.num').html()
+            let price = $ele.parents('.comic').find(".hot").html()
+            $ele.parents('.comic').find(".xj").html(num * price)
+
+            all_num += type ? 1 : -1
+            all_price += type ? (price - 0) : (0 - price)
+
+            $(".allnum").html(all_num)
+            $(".allprice").html(all_price)
+        }
+    </script>
 </body>
 
 </html>

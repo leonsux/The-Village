@@ -1,5 +1,6 @@
 // 加入购物车
-$('.add-cart').click(function () {
+$('.caption').delegate('.add-cart', 'click', function(){
+    console.log("舒服舒服")
     // 获取存在cookie中的用户信息，如果存在则获取，否则给个空值
     var user_info = $.cookie('user_info') ? JSON.parse($.cookie('user_info')) : null
 
@@ -19,3 +20,6 @@ $('.add-cart').click(function () {
         window.location.href = '/login'
     }
 })
+// $('.add-cart').click(function () {
+    
+// })

@@ -3,6 +3,7 @@ var router = express.Router();
 var connect_mongo = require("../modules/con_mongo")
 var async = require('async')
 var ObjectID = require('mongodb').ObjectID
+var api_handler = require("../modules/api")
 /* GET home page. */
 // 主页
 router.get('/', function(req, res, next) {
@@ -51,11 +52,6 @@ router.get('/', function(req, res, next) {
   })
   */
   // res.render('index', { title: 'Express' });
-});
-
-// 注册页
-router.get('/cart', function (req, res, next) {
-  res.render('cart', {})
 });
 
 // 登录页
@@ -109,6 +105,15 @@ router.get('/detail', function (req, res, next) {
     db.close()
   })
   // res.render('detail', {})
+});
+
+// 购物车页
+router.get('/cart', function (req, res, next) {
+
+    connect_mongo((db)=>{
+      // console.log("怎么啦？")
+      api_handler.cart(db, req, res)
+    })
 });
 
 

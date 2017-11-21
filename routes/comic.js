@@ -19,4 +19,14 @@ router.get('/addComic', function (req, res, next) {
     let params = req.query
     api_handler.addComic(params, res)
 })
+
+router.get('/reduceComic', function (req, res, next) {
+    let params = req.query
+    api_handler.reduceComic(params, res)
+})
+
+router.get('/removeComic', function (req, res, next) {
+    let params = req.query
+    api_handler.removeComic(params, res)
+})
 module.exports = router;

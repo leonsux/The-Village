@@ -102,7 +102,7 @@
                                         <%= item.hot %>
                                     </p>
                                     <p>
-                                        <button class="add-cart btn btn-danger">加入补番计划</button>
+                                        <button data-id="<%= item._id %>" class="add-cart btn btn-danger">加入补番计划</button>
                                     </p>
                                 </div>
                             </div>
@@ -121,8 +121,12 @@
         <a href="/">回到首页</a>
     </div>
 
+    <a style="position: fixed; right: 10px; bottom: 10px; z-index: 1001;" class="btn btn-danger" href="/cart">购物车</a>
+
+
     <%- include('./footer.ejs') %>
-        <script src="/javascripts/list.js"></script>
+    <script src="/javascripts/list.js"></script>
+    <script src="/javascripts/cart.js"></script>
 </body>
 
 </html>
