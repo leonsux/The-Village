@@ -90,7 +90,10 @@
                 <button class="count btn btn-default" >1</button>
                 <button class="add btn btn-primary" >+</button>
             </h3>
-            <h3 style="text-align:right;"><button data-id="<%= comic._id %>" class="add-cart btn btn-danger">加入补番计划</button></h3>
+            <h3 style="text-align:right;">
+                <button data-name="<%= comic.name %>" class="search btn btn-danger" onclick="search();">找找看</button>
+                <button data-id="<%= comic._id %>" class="add-cart btn btn-danger">加入补番计划</button>
+            </h3>
         </div>
     </div>
 
@@ -139,6 +142,10 @@
                 window.location.href = '/login'
             }
         })
+        function search(){
+            console.log($(".search").data('name'))
+            window.open('https://www.baidu.com/s?wd=' + $(".search").data('name'))
+        }
     </script>
 </body>
 

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+</head>
+<style>
+    html,body{
+        margin: 0;padding: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;align-items: center;
+    }
+    .login-box{
+        width: 500px;
+    }
+</style>
+<body>
+    
+    <div class="panel panel-primary login-box " ng-controller="loginController">
+        <div class="panel-heading">后台管理系统--登陆</div>  
+        <div class="panel-body">
+            <form ng-submit="submit($event)">
+                <div class="form-group">
+                    <label for="">用户名：</label>
+                    <input type="text" ng-model="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="">密码：</label>
+                    <input type="password" ng-model="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">提交</button>
+                    <button type="reset" class="btn btn-primary">重置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="/lib/angular.min.js"></script>
+    <script src="/javascripts/manager/ngmodules/http_service.js"></script>
+    <script>
+        var app = angular.module("app",['service'])
+        app.controller("loginController",["$scope",'_http',function ($scope,_http) {
+            $scope.submit = function(e){
+                e.preventDefault();
+                
+                _http({
+                    url:'/manager/login.do',
+                    data:{username:$scope.username,password:$scope.password},
+                    success:function(results){
+                        localStorage.setItem('isLogin','1')
+                        location.href='/manager/main'
+                    }
+                })
+                
+            }
+        }])
+    </script>
+</body>
+</html>
+
+<a href="move.mp4">click</a>

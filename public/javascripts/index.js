@@ -65,6 +65,7 @@ function showcomics(results) {
                     <h3><a href="/detail?id=${item._id}"><span style="display: inline-block;" class="animated">${item.name}</span></a></h3>
                     <p>人气：${item.hot}</p>
                     <p>
+                    <button data-name="${item.name}" class="search btn btn-danger" onclick="search();">找找看</button>
                     <button data-id="${item._id}" class="add-cart btn btn-danger" >加入补番计划</button> 
                     </p>
                 </div>
@@ -104,6 +105,9 @@ function showcomics(results) {
             window.location.href = '/login'
         }
     })
+    $(".search").click(function(){
+        window.open('https://www.baidu.com/s?wd=' + $(this).data('name'))
+    })
 }
 
 // 动画效果
@@ -112,6 +116,9 @@ $('.animated').mouseover(function(){
 })
 $('.animated').mouseout(function () {
     $(this).removeClass('tada');
+})
+$(".search").click(function(){
+    window.open('https://www.baidu.com/s?wd=' + $(this).data('name'))
 })
 
 

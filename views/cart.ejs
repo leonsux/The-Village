@@ -109,7 +109,7 @@
                 请&nbsp;&nbsp;<a href="/login">登陆</a>&nbsp;&nbsp;~
             </div>
         <% } else if(results == 'no-buy') { %>
-            <div>
+            <div class="alert alert-danger text-center">
                 不如<a href="/list">看番</a> 去~
             </div>
         <% } else { %>
@@ -135,6 +135,7 @@
                                             <%= item.num*item.hot %>
                                         </span>
                                     </p>
+
                                 </div>
                         
                             </div>
@@ -144,6 +145,7 @@
                                     <%= item.num %>
                                 </button>
                                 <button data-id="<%= item.comid %>" class="add-btn btn btn-primary">+</button>
+                                <button data-name="<%= item.name %>" class="search btn btn-danger" onclick="search();">找找看</button>
                             </div>
                         </li>
                     <% }) %> 
@@ -242,6 +244,10 @@
 
             $(".allnum").html(all_num)
             $(".allprice").html(all_price)
+        }
+        function search(){
+            console.log($(".search").data('name'))
+            window.open('https://www.baidu.com/s?wd=' + $(".search").data('name'))
         }
     </script>
 </body>

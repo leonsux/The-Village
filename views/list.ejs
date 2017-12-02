@@ -81,7 +81,7 @@
                 <!-- <button data-order="price" class="order-btn  btn btn-info">价格</button> -->
                 <button data-order="hot" class="order-btn btn btn-info">人气</button>
                         <!-- <a class="pull-right" href="/list">查看更多</a> -->
-                <input id="search-inp" style="width:200px;" placeholder="请输入商品名字" type="text" class="form-control pull-right">
+                <input id="search-inp" style="width:200px;" placeholder="输入关键词" type="text" class="form-control pull-right">
             </div>
             <!--  -->
             <div class="panel-body">
@@ -102,6 +102,7 @@
                                         <%= item.hot %>
                                     </p>
                                     <p>
+                                        <button data-name="<%= item.name %>" class="search btn btn-danger" onclick="search();">找找看</button>
                                         <button data-id="<%= item._id %>" class="add-cart btn btn-danger">加入补番计划</button>
                                     </p>
                                 </div>
@@ -121,7 +122,7 @@
         <a href="/">回到首页</a>
     </div>
 
-    <a style="position: fixed; right: 10px; bottom: 10px; z-index: 1001;" class="btn btn-danger" href="/cart">购物车</a>
+    <a style="position: fixed; right: 10px; bottom: 10px; z-index: 1001;" class="btn btn-danger" href="/cart">补番表</a>
 
 
     <%- include('./footer.ejs') %>

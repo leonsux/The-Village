@@ -5,7 +5,7 @@ const connect_mongo = (callback) => {
     // Connection URL
     var url = 'mongodb://localhost:27017/village';
     // Use connect method to connect to the Server
-    MongoClient.connect(url, function (err, db) {//db就是 latiao库对象
+    MongoClient.connect(url, function (err, db) {//db就是 village库对象
         callback(db)
 
         // db.close();//断开连接
