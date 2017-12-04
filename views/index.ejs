@@ -15,15 +15,61 @@
         a:hover {
             text-decoration: none;
         }
-        /*.muc{
+        .muc{
             position: fixed;
-            left: 0;
+            left: -320px;
             bottom: 0;
+            height: 86px;
             z-index: 100001;
-        }*/
+        }
+        #zhank{
+            cursor: pointer;
+            float: right;
+            background: #ADD8E6;
+            color: #fff;
+            font-weight: 900;
+            height: 66px;
+            margin-top: 9px;
+            line-height: 66px;
+            padding: 0px 5px;
+            margin-left: -10px;
+        }
     </style>
 </head>
 <body>
+    <div class="muc">
+        <!-- <iframe style="float: left;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=492190182&auto=1&height=32"></iframe> -->
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=496869422&auto=1&height=66"></iframe>
+        <div flag="1" id="zhank" class="glyphicon glyphicon-chevron-right">
+        </div>
+    </div>
+    <script type="text/javascript">
+        $("#zhank").click(function(){
+            var move = 0;
+            if ($(this).attr('flag') == '0') {
+                move = -320;
+                $(this).attr('flag', '1');
+            } else {
+                $(this).attr('flag', '0');
+                move = 0;
+                
+            }
+            $(this).parent().animate({
+                left: move
+            }, function(){
+                if ($("#zhank").attr('flag') == '0') {
+                    $("#zhank").removeClass('glyphicon-chevron-right');
+                    $("#zhank").addClass('glyphicon-chevron-left');
+                } else {
+                    $("#zhank").removeClass('glyphicon-chevron-left');
+                    $("#zhank").addClass('glyphicon-chevron-right');
+                    
+                }
+                
+            })
+        })
+    </script>
+   
     
     <div class="container">
         <nav class="navbar navbar-default">
@@ -38,7 +84,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a style="font-size:2em;" class="navbar-brand" href="/">那个村</a>
-                    <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=492190182&auto=1&height=32"></iframe>
+                    
                 </div>
         
                 <!-- Collect the nav links, forms, and other content for toggling -->
