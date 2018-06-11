@@ -1,3 +1,11 @@
+body {
+  background: #EAE9E7 url(/images/darling.jpg) no-repeat;
+  background-size: contain;
+  cursor: url(/images/icons/arrow.png), auto;
+}
+a, .btn {
+  cursor: url(/images/icons/point.png), auto;
+}
 .logined a, .logined div{
     float: left;
 }
@@ -11,4 +19,45 @@
     color: rgb(109, 179, 179);
     font-weight: 900;
     font-size: 1.2em;
+}
+#can {
+/*  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;*/
+  display: inline-block;
+  background: rgba(122, 134, 122, 0);
+}
+.navbar {
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+}
+.banner {
+  /*background: rgb(0, 0, 0, 0.8);*/
+
+}
+.titles {
+  height: 500px;
+  font-family: 'Comic Sans MS';
+  color: #fff;
+  font-size: 80px;
+  text-align: center;
+  /*line-height: 500px;*/ 
+  opacity: 0.8;
+  font-weight: 900;
+  text-shadow: 2px 2px 14px #000;
+}
+#live2d {
+  /*width: au;*/
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+  text-align: right;
+}
+.comic-box {
+  background: #FFF;
+}
+.container {
+  padding: 0;
 }

@@ -45,6 +45,7 @@ function form_Check(){
 
 // 注册
 function register(){
+    console.log('怎么了')
     if ($("#username").attr('f') == 1) {
         if ($("#psw").attr('f') == 1) {
             if ($("#confpsw").attr('f') == 1) {
@@ -66,6 +67,7 @@ function deal(){
     let username = $("#username").val()
     let password = $("#psw").val()
     let nickname = $("#nickname").val()
+    console.log('FALA')
 
     $.ajax({
         url: '/users/register',

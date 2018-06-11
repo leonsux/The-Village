@@ -11,6 +11,12 @@
     <script src="/lib/js/jquery.js"></script>
     <script src="/lib/js/bootstrap.js"></script>
     <script src="/lib/js/jq.cookie.js"></script>
+    <script src="/lib/js/clock.js"></script>
+
+    <script type="text/javascript" src="/assets/pixi.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/assets/live2d.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/assets/pixi-live2d.js" charset="utf-8"></script>
+
     <style>
         a:hover {
             text-decoration: none;
@@ -37,87 +43,46 @@
     </style>
 </head>
 <body>
+    <div id="live2d"></div>
+    <script type="text/javascript" src="/assets/live2d-mod.js" charset="utf-8"></script>
+
     <div class="muc">
         <!-- <iframe style="float: left;" frameborder="no" border="0" marginwidth="0" marginheight="0" width=298 height=52 src="//music.163.com/outchain/player?type=2&id=492190182&auto=1&height=32"></iframe> -->
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=496869422&auto=1&height=66"></iframe>
         <div flag="1" id="zhank" class="glyphicon glyphicon-chevron-right">
         </div>
     </div>
-    <script type="text/javascript">
-        $("#zhank").click(function(){
-            var move = 0;
-            if ($(this).attr('flag') == '0') {
-                move = -320;
-                $(this).attr('flag', '1');
-            } else {
-                $(this).attr('flag', '0');
-                move = 0;
-                
-            }
-            $(this).parent().animate({
-                left: move
-            }, function(){
-                if ($("#zhank").attr('flag') == '0') {
-                    $("#zhank").removeClass('glyphicon-chevron-right');
-                    $("#zhank").addClass('glyphicon-chevron-left');
-                } else {
-                    $("#zhank").removeClass('glyphicon-chevron-left');
-                    $("#zhank").addClass('glyphicon-chevron-right');
-                    
-                }
-                
-            })
-        })
-    </script>
-   
     
     <div class="container">
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                        aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a style="font-size:2em;" class="navbar-brand" href="/">那个村</a>
+                    <a style="font-size:2em; padding: 0 0 0 20px; color: #fff; font-family: 'Comic Sans MS';" class="navbar-brand" href="/">
+                        <img style="height: 100%; display: inline-block;" src="/images/logo.png" alt="">
+                    The Village</a>
                     
                 </div>
-        
-                <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    
-
-                    
                     <ul class="nav navbar-nav navbar-right">
                         <li class="logined hidden">
                             <div>
-                                <!-- <span>你好：</span> -->
                                 <span class="userNick"></span>
                             </div>
-                            <a class="" href="/">注销</a>
+                            <a class="" href="/" style="color: #fff;">注销</a>
                         </li>
                         <li class="unlogin">
-                            <a href="/login">登陆</a>
+                            <a href="/login" style="color: #fff;">登陆</a>
                         </li>
                         <li class="unlogin">
-                            <a href="/register">注册</a>
+                            <a href="/register" style="color: #fff;">注册</a>
                         </li>
-                       
                     </ul>
                 </div>
-                <!-- /.navbar-collapse -->
             </div>
-            <!-- /.container-fluid -->
         </nav>
 
-        <!-- <img src="/images/banner.jpg" width="100%" alt=""> -->
-
     </div>
-
+ <!--
     <div class="container banner">
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
     
@@ -130,7 +95,7 @@
             <div class="carousel-inner" role="listbox">
                 <% banners.forEach((item,i)=>{ %>
                     <div style=" overflow:hidden;" class="item <%= i==0?'active':'' %>">
-                        <img width="100%" src="<%= item.bannerurl %>" title="<%= item.bannertitle %>" alt="...">
+                        <img style="height: 300px;"  src="<%= item.bannerurl %>" title="<%= item.bannertitle %>" alt="...">
                     </div>
                 <% }) %>
             </div>
@@ -138,12 +103,20 @@
         </div>
     </div>
 
-    <!--  -->
+     -->
+
+
+    <div class="container titles">
+        <canvas id="can"></canvas><br/>
+        The Village
+    </div>     
+
     <div style="margin-top:20px;" class="container comics">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <% classes.forEach((item,i)=>{ %>
                     <button data-id="<%= item.classid %>" class=" type-btn btn btn-<%= i==0?'primary':'info'%>">
+                        <img  src="/images/icons/item<%=i+1%>.png" alt="" />
                         <%= item.class%>
                     </button>
                 <% }) %>
@@ -185,5 +158,40 @@
     <%- include('./footer.ejs') %>  
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/cart.js"></script>
+    <script type="text/javascript">
+        $("#zhank").click(function(){
+            var move = 0;
+            if ($(this).attr('flag') == '0') {
+                move = -320;
+                $(this).attr('flag', '1');
+            } else {
+                $(this).attr('flag', '0');
+                move = 0;
+                
+            }
+            $(this).parent().animate({
+                left: move
+            }, function(){
+                if ($("#zhank").attr('flag') == '0') {
+                    $("#zhank").removeClass('glyphicon-chevron-right');
+                    $("#zhank").addClass('glyphicon-chevron-left');
+                } else {
+                    $("#zhank").removeClass('glyphicon-chevron-left');
+                    $("#zhank").addClass('glyphicon-chevron-right');
+                }    
+            })
+        })
+        new Clock({
+          id: 'can', //必须：页面中canvas的id
+          size: 230, //选填（默认300）：canvas大小
+          // 一下均为选填，不填则使用缺省值
+          bgColor: 'rgb(0,0,0,0))', // 背景色
+          baseColor: '#fff',//基线颜色
+          hColor: '#3B200C',//时针颜色
+          mColor: '#DE8100',//分针颜色
+          sColor: '#5ED5D1',//秒针颜色
+          tColor: '#fff'//文字颜色
+        });
+    </script>
 </body>
 </html>

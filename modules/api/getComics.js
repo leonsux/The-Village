@@ -9,7 +9,6 @@ const getComic = (params, res) => {
             res.send(results)
         })
     })
-
 }
 
 module.exports = getComic

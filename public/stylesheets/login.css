@@ -1,11 +1,12 @@
 .container .panel{
-    width: 30%;
-    float: left;
-}
-.container img{
-    width: 65%;
-    float: right;
+    width: 60%;
+    /*float: left;*/
+    margin: 0 auto;
+    background: rgba(0, 0, 0, 0.7);
 }
 .to-register{
     cursor: pointer;
+}
+label {
+  color: #fff;
 }
